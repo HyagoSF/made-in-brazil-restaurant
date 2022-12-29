@@ -1,0 +1,26 @@
+.navbarList {
+	/* margin-left: 20rem; */
+	margin-right: -20rem;
+	display: flex;
+    text-decoration: none;
+}
+
+.navbarList li {
+	margin-right: 5rem;
+	list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+@media screen and (max-width: 768px) {
+	.navbarList {
+		margin-right: -4rem;
+	}
+    .navbarList li {
+        margin-right: 2rem;
+        list-style-type: none;
+    }
+}

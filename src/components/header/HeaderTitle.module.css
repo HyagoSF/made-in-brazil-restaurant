@@ -1,0 +1,13 @@
+.one {
+	color: Green;
+	text-shadow: -0.5px 0px 0px #fff, 0.5px 0px 0px #fff, 0px -1px 0px #fff,
+		0px 0.5px 0px #fff;
+}
+
+.two {
+	color: yellow;
+}
+
+.three {
+	color: blue;
+}

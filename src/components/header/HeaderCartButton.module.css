@@ -1,0 +1,17 @@
+.button{
+    background-color: #fff;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 10rem;
+}
+
+.totalItems{
+    border-radius: 5px;
+    padding: 0.4rem;
+    background-color: rgb(219, 219, 219);
+    font-weight: 700;
+}

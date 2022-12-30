@@ -1,0 +1,15 @@
+.eachMeal {
+	display: flex;
+	justify-content: space-between;
+	padding: 5rem 1.5rem 0rem 1.5rem;
+}
+
+.name {
+	font-size: 1.5rem;
+}
+
+.price {
+	font-size: 1.3rem;
+	color: blue;
+	font-weight: 700;
+}

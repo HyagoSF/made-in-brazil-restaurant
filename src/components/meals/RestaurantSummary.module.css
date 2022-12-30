@@ -1,0 +1,23 @@
+.summary{
+    display: flex;
+    justify-content: space-around;
+    margin: 5rem 5%;
+    align-items: center;
+
+}
+
+.summary div{
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.summary p {
+    margin-top: 2rem;
+}
+
+
+.image1{
+    width: 350px;
+    height: 400px;
+    border-radius: 20px;
+}

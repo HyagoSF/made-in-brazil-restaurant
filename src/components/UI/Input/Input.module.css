@@ -1,0 +1,11 @@
+.amount-label {
+	font-size: 1.3rem;
+}
+
+.amount {
+	background-color: grey;
+	border-radius: 15px;
+	margin-left: 1rem;
+	width: 3rem;
+	padding: 2px 4px;
+}

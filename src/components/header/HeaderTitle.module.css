@@ -1,11 +1,11 @@
 .one {
 	color: Green;
-	text-shadow: -0.5px 0px 0px #fff, 0.5px 0px 0px #fff, 0px -1px 0px #fff,
-		0px 0.5px 0px #fff;
 }
 
 .two {
 	color: yellow;
+	text-shadow: -0.5px 0px 0px rgb(148, 148, 0), 0.5px 0px 0px rgb(148, 148, 0), 0px -1px 0px rgb(148, 148, 0),
+	0px 0.5px 0px rgb(148, 148, 0);
 }
 
 .three {

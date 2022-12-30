@@ -3,7 +3,7 @@ import HeaderCartIcon from './HeaderCartIcon';
 
 const HeaderCartButton = () => {
 	return (
-		<button className={classes.button}>
+		<button onClick={()=> {}} className={classes.button}>
 			<HeaderCartIcon />
 			<h1>Cart</h1>
             <span className={classes.totalItems}>5</span>

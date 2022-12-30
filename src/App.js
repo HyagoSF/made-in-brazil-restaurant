@@ -2,19 +2,22 @@ import { Fragment } from 'react';
 
 import Header from './components/header/Header';
 
+import Meals from './components/meals/Meals';
+
 const App = () => {
 	return (
 		<Fragment>
 			{/* Header */}
-            <Header />
+			<Header />
 
 			<main>
 				{/* Meals */}
-				<h1>Meals here</h1>
+
+				<Meals />
 			</main>
 
 			{/* Footer */}
-            <h1>Footer here</h1>
+			<h1>Footer here</h1>
 		</Fragment>
 	);
 };

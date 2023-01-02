@@ -6,17 +6,17 @@ import HeaderNavbar from './HeaderNavbar';
 
 import HeaderTitle from './HeaderTitle';
 
-const Header = () => {
+const Header = (props) => {
 	return (
 		<div className={classes.header}>
 			{/* title */}
-            <HeaderTitle/>
+			<HeaderTitle />
 
 			{/* Navigate Bar */}
-			<HeaderNavbar/>
+			<HeaderNavbar />
 
 			{/* Cart */}
-			<HeaderCartButton />
+			<HeaderCartButton onClick={props.onClick} />
 		</div>
 	);
 };

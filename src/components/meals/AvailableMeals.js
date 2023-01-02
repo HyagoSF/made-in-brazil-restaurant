@@ -14,32 +14,32 @@ const AvailableMeals = () => {
 			price: 8.25,
 		},
 		{
-			id: 'm1',
+			id: 'm2',
 			name: 'Pao de Queijo',
 			description: 'Brazilian mini cheese breads',
 			price: 6.5,
 		},
 		{
-			id: 'm1',
+			id: 'm3',
 			name: 'Mandioca Frita',
 			description: 'Cassava chips served with alioli',
 			price: 5.95,
 		},
 		{
-			id: 'm1',
+			id: 'm4',
 			name: 'Bolinhos de Bacalhau',
 			description: 'Mini Salt cod fishcakes served with lime mayo',
 			price: 8.15,
 		},
 		{
-			id: 'm1',
+			id: 'm5',
 			name: 'Frango a Passarinho',
 			description:
 				'Marinated crispy chicken pieces served with lime mayo',
 			price: 7.75,
 		},
 		{
-			id: 'm1',
+			id: 'm6',
 			name: 'Coxinha',
 			description:
 				'Chicken pastries with aioli, a classic Brazilian street food',

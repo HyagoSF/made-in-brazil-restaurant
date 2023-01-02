@@ -1,0 +1,7 @@
+.cart-item {
+	display: flex;
+	justify-content: space-between;
+	margin: 0rem 0 2rem 0;
+	padding: 0 2rem 2rem 2rem;
+	border-bottom: 1px solid blue;
+}

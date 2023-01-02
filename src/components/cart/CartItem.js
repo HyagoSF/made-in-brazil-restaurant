@@ -3,22 +3,24 @@ import classes from './CartItem.module.css';
 import CartItemForm from './CartItemForm';
 
 const CartItem = (props) => {
+	const items = props.cartItems;
+
 	return (
 		<div>
-			<div className={classes['cart-item']}>
-				<div>
-					<h3>Item Name</h3>
+			{items.map((item) => (
+				<div className={classes['cart-item']}>
+					<div>
+						<h3>{item.name}</h3>
+						<p>x {item.amount}</p>
+					</div>
 
-					{/* amount */}
-					<p>x 3</p>
+					{/* CartItemForm */}
+					<CartItemForm item={item} />
 				</div>
-
-				{/* CartItemForm */}
-				<CartItemForm />
-			</div>
+			))}
 		</div>
 
-        // 
+		//
 	);
 };
 

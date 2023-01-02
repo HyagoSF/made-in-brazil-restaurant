@@ -11,8 +11,7 @@ const MealItem = (props) => {
 				<p className={classes.price}>$ {props.price}</p>
 			</div>
 
-			{/* Here is gonna be my form, to collect */}
-
+			{/* Here is gonna be my form, to collect data of amount*/}
 			<MealItemForm />
 		</li>
 	);

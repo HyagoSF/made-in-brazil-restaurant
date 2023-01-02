@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import Header from './components/header/Header';
 
 import Meals from './components/meals/Meals';
@@ -8,7 +6,12 @@ import Modal from './components/UI/Modal/Modal';
 
 import { useState } from 'react';
 
+import CartProvider from './stage/CartProvider';
+
+
+
 const App = () => {
+
 	const isModalOpenedHandler = (props) => {
 		props.preventDefault();
 		setIsModalOpened(true);
@@ -16,17 +19,15 @@ const App = () => {
 
 	const onClose = (props) => {
 		setIsModalOpened(false);
-	}
+	};
 
 	const [isModalOpened, setIsModalOpened] = useState(false);
 
-	console.log(isModalOpened);
-
 	return (
-		<Fragment>
+		<CartProvider>
 			{/* Header */}
 
-			{isModalOpened && <Modal onClose={onClose}/>}
+			{isModalOpened && <Modal onClose={onClose} />}
 
 			<Header
 				onClick={isModalOpenedHandler}
@@ -41,7 +42,7 @@ const App = () => {
 
 			{/* Footer */}
 			<h1>Footer here</h1>
-		</Fragment>
+		</CartProvider>
 	);
 };
 

@@ -8,9 +8,10 @@ import CartContext from '../../stage/cart-context';
 const HeaderCartButton = (props) => {
 	const ctx = useContext(CartContext);
 
-	const totalItemsInTheCart = ctx.items.reduce(
+	const updatedTotalItems = ctx.items.reduce(
 		// I start at 0, and for each item of the array I'll add the item.amount to my accumulator
-		(totalAmount, item) => totalAmount + item.amount,
+		// I was summing up eachItem.amount this amount as a string, because when I use forward ref and get the .current.value it returns me a string
+		(accumulator, eachItem) => accumulator + eachItem.amount,
 		0
 	);
 
@@ -19,7 +20,7 @@ const HeaderCartButton = (props) => {
 			<HeaderCartIcon />
 			<h1>Cart</h1>
 			{/* showing the total Amount based on the cartContext totalAmount property */}
-			<span className={classes.totalItems}>{totalItemsInTheCart}</span>
+			<span className={classes.totalItems}>{updatedTotalItems}</span>
 		</button>
 	);
 };

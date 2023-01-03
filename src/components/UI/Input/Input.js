@@ -1,6 +1,7 @@
 import classes from './Input.module.css';
+import React from 'react';
 
-const Input = (props) => {
+const Input = React.forwardRef((props, ref) => {
 	return (
 		<div className="">
 			<label className={classes['amount-label']} htmlFor="amount">
@@ -8,9 +9,14 @@ const Input = (props) => {
 			</label>
 
 			{/* passing all proprieties through props.input object */}
-			<input className={classes.amount} {...props.input} />
+			<input
+				ref={ref}
+				className={classes.amount}
+				{...props.input}
+				// required
+			/>
 		</div>
 	);
-};
+});
 
 export default Input;

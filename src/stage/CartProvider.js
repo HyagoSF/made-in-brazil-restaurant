@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import CartContext from './cart-context.js';
 
-const initialItems = {
+const defaultCartState = {
 	items: [],
 	totalAmount: 0,
 };
@@ -9,19 +9,9 @@ const initialItems = {
 function reducer(itemsState, action) {
 	switch (action.type) {
 		case 'ADD_ITEM_CART':
-			// add some validation here to see if I already have the item.name inside the ctx, and if I do, I should just change the amount of it, instead of just adding more item
-
-			// const newItemsList = [...ctx.items, amount: amount];
-
-			// itemsState.map((item)=> {
-			// 	if (props.id === item.id){
-
-			// 	}
-			// })
-
-			// in itemsState is there some element where the element.id is the same as the action.id element I'm trying to add into my current state(My items)
-			// const found = itemsState.some((el) => el.id == action.item.id);
-			// console.log(found);
+			//if I already have the item inside the ctx, and if I do, I should just change the amount of it, instead of just adding more item
+			const updatedTotalAmount =
+				itemsState.totalAmount + action.item.amount * action.item.price;
 
 			const existingCartItemIndex = itemsState.items.findIndex(
 				(item) => item.id === action.item.id
@@ -29,24 +19,12 @@ function reducer(itemsState, action) {
 
 			const existingCartItem = itemsState.items[existingCartItemIndex];
 
-			console.log(existingCartItemIndex);
-
-			// const testing1 = itemsState.items.map((el) => el.key);
-
-			// console.log('found: ' + found);
-			// console.log('element.id: ' + testing1);
-			// console.log('Item I want to add key: ' + action.item.key);
-
-			// const newItemsArrayIfItemFound;
-
 			// variables that will be useful
 			let updatedItem;
 			let updatedItems;
 
 			// if the item is not in the cart yet
 			if (existingCartItem) {
-				// if the item is already in the cart go through it using .map() and then update the amount value to the new one
-
 				updatedItem = {
 					...existingCartItem,
 					amount: existingCartItem.amount + action.item.amount,
@@ -63,23 +41,57 @@ function reducer(itemsState, action) {
 
 				// than concat it in my state
 				updatedItems = itemsState.items.concat(updatedItem);
-
-				// itemsState.items.concat(...action.item);
-				// console.log('Item not found');
-				// return newItemsArray;
 			}
 
-			return { items: updatedItem, totalAmount: 0 };
-		// return itemsState.items;
+			return {
+				items: updatedItems,
+				totalAmount: updatedTotalAmount,
+			};
 
 		// if the item is already in the cart just add one to amount
+		case 'REMOVE_ITEM_CART':
+			// remove item from cart
 
-		// case 'REMOVE_ITEM_CART':
-		// add item
+			const itemToRemoveIndex = itemsState.items.findIndex(
+				(item) => item.id === action.id
+			);
 
+			const itemToRemove = itemsState.items[itemToRemoveIndex];
+
+			const updatedTotalAmount2 =
+				itemsState.totalAmount - itemToRemove.price;
+
+			let updatedItem2;
+			let updatedItems2;
+
+			if (itemToRemove.amount === 1) {
+				// remove this item from the state
+
+				// filter the array of items those items that are not the same as my action item
+				updatedItems2 = itemsState.items.filter(
+					(item) => item.id !== action.id
+				);
+			} else {
+				// just remove one in the amount
+				updatedItem2 = {
+					...itemToRemove,
+					amount: itemToRemove.amount - 1,
+				};
+
+				//copy all my items and store it in an array
+				updatedItems2 = [...itemsState.items];
+
+				// in place of the item I want to remove replace it to my new updatedItem2
+				updatedItems2[itemToRemoveIndex] = updatedItem2;
+			}
+
+			return {
+				items: updatedItems2,
+				totalAmount: updatedTotalAmount2,
+			};
 		// if the item is already in the cart just remove one of the amount
 		default:
-			return { items: itemsState, totalAmount: 0 };
+			return defaultCartState;
 	}
 }
 
@@ -88,11 +100,15 @@ const CartProvider = (props) => {
 		// when I add an Item to cart, dispatch an action to execute the reducer function of add_item_cart
 		// I'm passing all my items in the item property item, and to access it in my reducer is just call action.item
 		dispatchAction({ type: 'ADD_ITEM_CART', item: item });
+		// console.log(cartState);
+		// console.log(cartState.items);
 	};
 
-	const removeItemOfCartHandler = (id) => {};
+	const removeItemOfCartHandler = (id) => {
+		dispatchAction({ type: 'REMOVE_ITEM_CART', id: id });
+	};
 
-	const [cartState, dispatchAction] = useReducer(reducer, initialItems);
+	const [cartState, dispatchAction] = useReducer(reducer, defaultCartState);
 
 	const cartContext = {
 		items: cartState.items,

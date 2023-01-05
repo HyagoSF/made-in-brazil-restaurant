@@ -10,14 +10,16 @@ const MealItem = (props) => {
 
 	const ctx = useContext(CartContext);
 
+	const twoDecimalPrice = props.price.toFixed(2);
+
 	const onAddItemToCartHandler = (amount) => {
 		//I need to add the item and pass the item I got from the input, I have to use useRef to be able to take data from that input and pass that ref to my addItem
 		ctx.addItem({
-			// key: props.id,
+			key: props.id,
 			id: props.id,
 			name: props.name,
 			description: props.description,
-			price: props.price,
+			price: twoDecimalPrice,
 			amount: amount,
 		});
 	};

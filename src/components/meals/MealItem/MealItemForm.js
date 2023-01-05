@@ -13,9 +13,9 @@ const MealItemForm = (props) => {
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 
-		const currentAmountAsString = refItem.current.value;	//If I don't use .value I'll get the input as html
+		const currentAmountAsString = refItem.current.value; //If I don't use .value I'll get the input as html
 
-		const currentAmountAsNumber = +currentAmountAsString;	//to transform to number
+		const currentAmountAsNumber = +currentAmountAsString; //to transform to number
 
 		if (
 			currentAmountAsString.trim().length === 0 ||
@@ -24,7 +24,7 @@ const MealItemForm = (props) => {
 		) {
 			setIsAmountIsValid(false);
 			// and then return not to add this item to cart
-			return
+			return;
 		}
 
 		props.onAddItemToCart(currentAmountAsNumber);
@@ -35,7 +35,13 @@ const MealItemForm = (props) => {
 		<form action="" className={classes.form} onSubmit={onSubmitHandler}>
 			<Input
 				ref={refItem}
-				input={{ type: 'number', max: '5', min: '1', name: 'amount' }}
+				input={{
+					id: 'amount_' + props.id,
+					type: 'number',
+					max: '5',
+					min: '1',
+					name: 'amount',
+				}}
 			/>
 
 			<button className={classes.button}>+ add</button>

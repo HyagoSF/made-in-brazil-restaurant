@@ -4,7 +4,7 @@ import React from 'react';
 const Input = React.forwardRef((props, ref) => {
 	return (
 		<div className="">
-			<label className={classes['amount-label']} htmlFor="amount">
+			<label className={classes['amount-label']} htmlFor={props.input.id}>
 				Amount
 			</label>
 

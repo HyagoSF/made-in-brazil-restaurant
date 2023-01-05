@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import CartContext from '../../../stage/cart-context';
 import classes from './MealItem.module.css';
 
@@ -11,14 +11,14 @@ const MealItem = (props) => {
 	const ctx = useContext(CartContext);
 
 	const onAddItemToCartHandler = (amount) => {
-
 		//I need to add the item and pass the item I got from the input, I have to use useRef to be able to take data from that input and pass that ref to my addItem
 		ctx.addItem({
-			key: props.id,
+			// key: props.id,
+			id: props.id,
 			name: props.name,
 			description: props.description,
 			price: props.price,
-			amount: amount, 
+			amount: amount,
 		});
 	};
 
@@ -32,6 +32,7 @@ const MealItem = (props) => {
 
 			{/* Here is gonna be my form, to collect data of amount*/}
 			<MealItemForm
+				id={props.id}
 				// ref={refItem}
 				onAddItemToCart={onAddItemToCartHandler}
 			/>

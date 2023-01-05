@@ -3,9 +3,6 @@ import CartContext from '../../stage/cart-context';
 import classes from './Cart.module.css';
 import CartItem from './CartItem';
 
-
-
-
 const Cart = (props) => {
 	const ctx = useContext(CartContext);
 

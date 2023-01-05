@@ -7,40 +7,45 @@ import MealItem from './MealItem/MealItem';
 const AvailableMeals = () => {
 	const DUMMY_MEALS = [
 		{
-			id: 'm1',
+			id: 'i1',
 			name: 'Coxinha',
 			description:
 				'Chicken pastries with aioli, a classic Brazilian street food',
 			price: 8.25,
+
 		},
 		{
-			id: 'm2',
+			id: 'i2',
 			name: 'Pao de Queijo',
 			description: 'Brazilian mini cheese breads',
 			price: 6.5,
+
 		},
 		{
-			id: 'm3',
+			id: 'i3',
 			name: 'Mandioca Frita',
 			description: 'Cassava chips served with alioli',
 			price: 5.95,
+
 		},
 		{
-			id: 'm4',
+			id: 'i4',
 			name: 'Bolinhos de Bacalhau',
 			description: 'Mini Salt cod fishcakes served with lime mayo',
 			price: 8.15,
+
 		},
 		{
-			id: 'm5',
+			id: 'i5',
 			name: 'Frango a Passarinho',
 			description:
 				'Marinated crispy chicken pieces served with lime mayo',
 			price: 7.75,
+
 		},
 		{
-			id: 'm6',
-			name: 'Coxinha',
+			id: 'i6',
+			name: 'Bacon',
 			description:
 				'Chicken pastries with aioli, a classic Brazilian street food',
 			price: 8.25,

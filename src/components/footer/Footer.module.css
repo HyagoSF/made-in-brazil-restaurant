@@ -1,0 +1,12 @@
+.footer{
+    /* to fix this in the bottom */
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    text-align: center;
+    padding: 30px;
+    margin: 5rem auto 0 auto;
+    border: 1px solid black;
+}

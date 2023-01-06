@@ -4,13 +4,13 @@ const HeaderNavbar = () => {
 	return (
 		<ul className={classes.navbarList}>
 			<li>
-				<a href="#">Home</a>
+				<a href="/">Home</a>
 			</li>
 			<li>
-				<a href="#">Meals</a>
+				<a href="/">Meals</a>
 			</li>
 			<li>
-				<a href="#">About us</a>
+				<a href="/">About us</a>
 			</li>
 		</ul>
 	);

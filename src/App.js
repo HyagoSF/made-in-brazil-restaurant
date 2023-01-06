@@ -8,16 +8,15 @@ import { useState } from 'react';
 
 import CartProvider from './stage/CartProvider';
 
-
+import Footer from './components/footer/Footer';
 
 const App = () => {
-
 	const isModalOpenedHandler = (props) => {
 		props.preventDefault();
 		setIsModalOpened(true);
 	};
 
-	const onClose = (props) => {
+	const onClose = () => {
 		setIsModalOpened(false);
 	};
 
@@ -36,12 +35,11 @@ const App = () => {
 
 			<main>
 				{/* Meals */}
-
 				<Meals />
 			</main>
 
 			{/* Footer */}
-			<h1>Footer here</h1>
+			<Footer />
 		</CartProvider>
 	);
 };

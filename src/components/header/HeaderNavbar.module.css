@@ -24,3 +24,9 @@ a{
         list-style-type: none;
     }
 }
+
+@media screen and (max-width: 1368px){
+	.navbarList{
+		margin-right: -6rem;
+	}
+}

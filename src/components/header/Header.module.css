@@ -1,11 +1,14 @@
-.header{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* background-color: grey; */
-    border-bottom: 1px solid black;
-    max-width: 95%;
-    margin: 0 auto;
-    z-index: 10;
-}
+.header {
+	/* to fix it in the top */
+	position: sticky;
+	top: 0;
 
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: white;
+	border-bottom: 1px solid black;
+	max-width: 95%;
+	margin: 0 auto;
+	z-index: 10;
+}

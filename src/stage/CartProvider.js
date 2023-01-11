@@ -1,10 +1,51 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState, useCallback, useEffect } from 'react';
 import CartContext from './cart-context.js';
 
 const defaultCartState = {
 	items: [],
 	totalAmount: 0,
 };
+
+const DUMMY_MEALS = [
+	{
+		id: 'i1',
+		name: 'Coxinha',
+		description:
+			'Chicken pastries with aioli, a classic Brazilian street food',
+		price: 8.25,
+	},
+	{
+		id: 'i2',
+		name: 'Pao de Queijo',
+		description: 'Brazilian mini cheese breads',
+		price: 6.5,
+	},
+	{
+		id: 'i3',
+		name: 'Mandioca Frita',
+		description: 'Cassava chips served with alioli',
+		price: 5.95,
+	},
+	{
+		id: 'i4',
+		name: 'Bolinhos de Bacalhau',
+		description: 'Mini Salt cod fishcakes served with lime mayo',
+		price: 8.15,
+	},
+	{
+		id: 'i5',
+		name: 'Frango a Passarinho',
+		description: 'Marinated crispy chicken pieces served with lime mayo',
+		price: 7.75,
+	},
+	{
+		id: 'i6',
+		name: 'Bacon',
+		description:
+			'Chicken pastries with aioli, a classic Brazilian street food',
+		price: 8.25,
+	},
+];
 
 function reducer(itemsState, action) {
 	switch (action.type) {
@@ -95,7 +136,47 @@ function reducer(itemsState, action) {
 	}
 }
 
+function reducer2(state, action) {
+	switch (action.type) {
+		case 'ADD_AVAILABLE_ITEM':
+			// let updatedList = state.concat(action.newItem);
+			// console.log(updatedList);
+			let updatedAvailableItems;
+
+			updatedAvailableItems = state.concat(action.availableItem);
+			return updatedAvailableItems;
+
+		default:
+			return state;
+	}
+}
+
 const CartProvider = (props) => {
+	// const [error, setError] = useState(null)
+
+	// const fetchItemHandler = useCallback(async function(){
+	// 	try{
+	// 		const response = await fetch('https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemList.json',{method: 'GET'});
+
+	// 		if(!response.ok){
+	// 			throw new Error('Something went wrong')
+	// 		}
+
+	// 		const data = await response.json();
+	// 		// console.log(data);
+
+	// 	} catch(error) {
+	// 		setError(error.message);
+	// 	}
+
+	// })
+
+	// // execute fetchItemHandler when the app starts and every time my item change
+	// useEffect(() => {
+	//   fetchItemHandler();
+	// }, [fetchItemHandler])
+
+	// handling with adding items to cart ******************************
 	const addItemToCartHandler = (item) => {
 		// when I add an Item to cart, dispatch an action to execute the reducer function of add_item_cart
 		// I'm passing all my items in the item property item, and to access it in my reducer is just call action.item
@@ -108,13 +189,33 @@ const CartProvider = (props) => {
 		dispatchAction({ type: 'REMOVE_ITEM_CART', id: id });
 	};
 
+	// Handling with adding new Available items *****************************
+	const addNewAvailableItemHandler = (availableItem) => {
+		dispatchCurrentItemsAction({
+			type: 'ADD_AVAILABLE_ITEM',
+			availableItem: availableItem,
+		});
+
+	};
+
+	const removeNewAvailableItemHandler = (id) => {
+		return;
+	};
+
 	const [cartState, dispatchAction] = useReducer(reducer, defaultCartState);
+	const [currentItemsState, dispatchCurrentItemsAction] = useReducer(
+		reducer2,
+		DUMMY_MEALS
+	);
 
 	const cartContext = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemOfCartHandler,
+		availableItems: currentItemsState,
+		addNewAvailableItem: addNewAvailableItemHandler,
+		removeAvailableItem: removeNewAvailableItemHandler,
 	};
 
 	return (

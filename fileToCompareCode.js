@@ -1,103 +1,44 @@
-import { useReducer } from 'react';
+const fetchMoviesHandler = useCallback(async function () {
+	try {
+		setShowLoading(true);
+		setError(null);
 
-import CartContext from './cart-context';
+		// GET request using fetch inside useEffect React hook
+		const response = await fetch(
+			'https://react-http-a64d3-default-rtdb.firebaseio.com/movies.json'
+		);
 
-//simple object where I say that I have no items yet
-const defaultCartState = {
-	items: [],
-	totalAmount: 0,
-};
+		// check here before try to get the json data
+		if (!response.ok) {
+			// and if I throw this error, I'll be sent to the .catch block
+			throw new Error('Some error has occurred');
+		}
 
-const cartReducer = (state, action) => {
-	switch (action.type) {
-		case 'ADD_CART_ITEM':
-			const updatedTotalAmount =
-				state.totalAmount + action.item.price * action.item.amount;
+		const data = await response.json();
 
-			const existingCartItemIndex = state.items.findIndex(
-				(item) => item.id === action.item.id
-			);
+		let newArray = [];
 
-			const existingCartItem = state.items[existingCartItemIndex];
+		for (const key in data) {
+			newArray.push({
+				key: key,
+				movie_title: data[key].movie_title,
+				movie_description: data[key].movie_description,
+				movie_releaseDate: data[key].movie_releaseDate,
+			});
+		}
 
-			let updatedItem;
-			let updatedItems;
+		dispatch({ movies: newArray, type: 'ADD_MOVIE' });
 
-			if (existingCartItem) {
-				updatedItem = {
-					...existingCartItem,
-					amount: existingCartItem.amount + action.item.amount,
-				};
-				updatedItems = [...state.items];
-				updatedItems[existingCartItemIndex] = updatedItem;
-			} else {
-				updatedItem = { ...action.item };
-				updatedItems = state.items.concat(updatedItem);
-			}
-
-			return { items: updatedItems, totalAmount: updatedTotalAmount };
-
-		case 'REMOVE_CART_ITEM':
-			const existingCartItemIndex2 = state.items.findIndex(
-				(item) => item.id === action.id
-			);
-
-			const existingCartItem2 = state.items[existingCartItemIndex2];
-
-			const updatedTotalAmount2 =
-				state.totalAmount - existingCartItem2.price;
-
-			let updatedItem2;
-			let updatedItems2;
-
-			if (existingCartItem2.amount > 1) {
-				updatedItem2 = {
-					...existingCartItem2,
-					amount: existingCartItem2.amount - 1,
-				};
-
-				updatedItems2 = [...state.items];
-
-				updatedItems2[existingCartItemIndex2] = updatedItem2;
-			} else {
-				updatedItems2 = state.items.filter(
-					(item) => item.id !== action.id
-				);
-			}
-
-			return { items: updatedItems2, totalAmount: updatedTotalAmount2 };
-
-		default:
-			return defaultCartState;
+		// after getting the movies show it
+		setShowLoading(false);
+	} catch (error) {
+		// console.log(error.message);
+		// error.message
+		setError(error.message);
 	}
-};
+	setShowLoading(false);
+}, []);
 
-const CartProvider = (props) => {
-	const [cartState, dispatchCarAction] = useReducer(
-		cartReducer,
-		defaultCartState
-	);
-
-	const addItemToCartHandler = (item) => {
-		dispatchCarAction({ type: 'ADD_CART_ITEM', item: item });
-	};
-
-	const removeItemFromCartHandler = (id) => {
-		dispatchCarAction({ type: 'REMOVE_CART_ITEM', id: id });
-	};
-
-	const cartContext = {
-		items: cartState.items,
-		totalAmount: cartState.totalAmount,
-		addItem: addItemToCartHandler,
-		removeItem: removeItemFromCartHandler,
-	};
-
-	return (
-		<CartContext.Provider value={cartContext}>
-			{props.children}
-		</CartContext.Provider>
-	);
-};
-
-export default CartProvider;
+useEffect(() => {
+	fetchMoviesHandler();
+}, [fetchMoviesHandler]);

@@ -10,8 +10,6 @@ const Cart = (props) => {
 
 	const totalAmountFixed = totalAmount.toFixed(2);
 
-	console.log(totalAmountFixed);
-
 	return (
 		<div className={classes['cart-content']}>
 			<h1 className={classes.title}>My Cart</h1>

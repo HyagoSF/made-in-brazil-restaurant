@@ -1,0 +1,67 @@
+.formSection {
+	display: block;
+
+	margin: 0 10%;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+
+}
+
+.form > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+input[name='price'] {
+	margin-bottom: 1rem;
+}
+
+button {
+	margin: 0 auto 0 auto;
+}
+
+.label {
+	padding: 1rem 0 0.5rem 0;
+	font-weight: 700;
+	width: 80%;
+	text-align: start;
+}
+
+.input {
+	width: 80%;
+	margin: 0 20;
+	font: inherit;
+	padding: 0.5rem;
+	border-radius: 12px;
+	border: 1px solid #ccc;
+}
+
+/* buttons actions */
+.buttons {
+	margin: 0 10%;
+	text-align: end;
+}
+
+.btnClose {
+	font-size: 1.3rem;
+	margin-top: 0.5rem;
+	padding: 0.5rem 1.8rem;
+	background-color: white;
+	border-radius: 15px;
+	float: end;
+	margin-right: 1rem;
+}
+
+.btnClose:hover {
+	background-color: rgb(255, 62, 62);
+	color: white;
+	border-color: white;
+}

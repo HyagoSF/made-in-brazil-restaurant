@@ -1,6 +1,6 @@
 import classes from './RestaurantSummary.module.css';
 
-import image from '../../assets/MadeInBrazil.jpg';
+import image from '../../assets/Prancheta1.png';
 
 const RestaurantSummary = () => {
 	return (
@@ -22,11 +22,7 @@ const RestaurantSummary = () => {
 				</ul>
 			</div>
 
-			<img
-				src={image}
-				alt="Made in Brazil pic"
-				className={classes.image1}
-			/>
+			<div className={classes.image1}/>
 		</div>
 	);
 };

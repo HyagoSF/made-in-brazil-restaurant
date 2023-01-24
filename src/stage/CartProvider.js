@@ -139,8 +139,6 @@ function reducer(itemsState, action) {
 function reducer2(state, action) {
 	switch (action.type) {
 		case 'ADD_AVAILABLE_ITEM':
-			// let updatedList = state.concat(action.newItem);
-			// console.log(updatedList);
 			let updatedAvailableItems;
 
 			updatedAvailableItems = state.concat(action.availableItem);
@@ -152,50 +150,118 @@ function reducer2(state, action) {
 }
 
 const CartProvider = (props) => {
-	// const [error, setError] = useState(null)
+	const [error, setError] = useState(null);
 
-	// const fetchItemHandler = useCallback(async function(){
-	// 	try{
-	// 		const response = await fetch('https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemList.json',{method: 'GET'});
+	//
+	// to get my data from my firebase
+	const fetchItemHandler = useCallback(async function () {
+		try {
+			const response = await fetch(
+				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList.json',
+				{ method: 'GET' }
+			);
 
-	// 		if(!response.ok){
-	// 			throw new Error('Something went wrong')
-	// 		}
+			if (!response.ok) {
+				throw new Error('Something went wrong');
+			}
 
-	// 		const data = await response.json();
-	// 		// console.log(data);
+			const data = await response.json();
+			// console.log(data); //to see my data
+		} catch (error) {
+			setError(error.message);
+		}
+	});
+	// console.log(data)
 
-	// 	} catch(error) {
-	// 		setError(error.message);
-	// 	}
+	// // check here before try to get the json data
+	// if (!response.ok) {
+	// 	// and if I throw this error, I'll be sent to the .catch block
+	// 	throw new Error('Some error has occurred');
+	// }
 
-	// })
+	// const data = await response.json();
 
-	// // execute fetchItemHandler when the app starts and every time my item change
-	// useEffect(() => {
-	//   fetchItemHandler();
-	// }, [fetchItemHandler])
+	// let newArray = [];
+
+	// for (const key in data) {
+	// 	newArray.push({
+	// 		key: key,
+	// 		movie_title: data[key].movie_title,
+	// 		movie_description: data[key].movie_description,
+	// 		movie_releaseDate: data[key].movie_releaseDate,
+	// 	});
+	// }
+
+	// dispatch({ movies: newArray, type: 'ADD_MOVIE' });
+
+	// execute fetchItemHandler when the app starts and every time my item change
+	useEffect(() => {
+		fetchItemHandler();
+	}, [fetchItemHandler]);
 
 	// handling with adding items to cart ******************************
-	const addItemToCartHandler = (item) => {
-		// when I add an Item to cart, dispatch an action to execute the reducer function of add_item_cart
-		// I'm passing all my items in the item property item, and to access it in my reducer is just call action.item
-		dispatchAction({ type: 'ADD_ITEM_CART', item: item });
-		// console.log(cartState);
-		// console.log(cartState.items);
+	const addItemToCartHandler = async (item) => {
+		try {
+			const response = await fetch(
+				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList/cartItems.json',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(item),
+				}
+			);
+
+			// when I add an Item to cart, dispatch an action to execute the reducer function of add_item_cart
+			// I'm passing all my items in the item property item, and to access it in my reducer is just call action.item
+			dispatchAction({ type: 'ADD_ITEM_CART', item: item });
+			// console.log(cartState);
+			// console.log(cartState.items);
+		} catch (e) {
+			console.log(e.message);
+		}
 	};
 
-	const removeItemOfCartHandler = (id) => {
+	const removeItemOfCartHandler = async (id) => {
+		const url =
+			'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList/itemsList/';
+
+		const response = await fetch(url + id + '.json', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(id),
+		});
+		if (!response.ok) {
+			throw new Error('Something happened');
+		}
+
 		dispatchAction({ type: 'REMOVE_ITEM_CART', id: id });
 	};
 
 	// Handling with adding new Available items *****************************
-	const addNewAvailableItemHandler = (availableItem) => {
-		dispatchCurrentItemsAction({
-			type: 'ADD_AVAILABLE_ITEM',
-			availableItem: availableItem,
-		});
+	const addNewAvailableItemHandler = async (availableItem) => {
+		try {
+			const response = await fetch(
+				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList/availableItems.json',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(availableItem),
+				}
+			);
 
+			dispatchCurrentItemsAction({
+				type: 'ADD_AVAILABLE_ITEM',
+				availableItem: availableItem,
+			});
+		} catch (e) {
+			console.log(e.message);
+		}
 	};
 
 	const removeNewAvailableItemHandler = (id) => {

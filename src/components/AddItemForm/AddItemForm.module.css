@@ -10,7 +10,6 @@
 .form {
 	display: flex;
 	flex-direction: column;
-
 }
 
 .form > div {
@@ -64,4 +63,13 @@ button {
 	background-color: rgb(255, 62, 62);
 	color: white;
 	border-color: white;
+}
+
+.invalid {
+	color: red;
+}
+
+.form-invalid input,
+.form-invalid textarea {
+	background-color: rgba(255, 0, 0, 0.377);
 }

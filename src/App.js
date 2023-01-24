@@ -28,6 +28,8 @@ const App = () => {
 
 			{isModalOpened && <Modal onClose={onClose} />}
 
+			<h1>Adding form Branch</h1>
+
 			<Header
 				onClick={isModalOpenedHandler}
 				isModalOpened={isModalOpened}

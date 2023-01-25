@@ -47,6 +47,7 @@ const DUMMY_MEALS = [
 	},
 ];
 
+// reducer to add items to cart
 function reducer(itemsState, action) {
 	switch (action.type) {
 		case 'ADD_ITEM_CART':
@@ -136,6 +137,7 @@ function reducer(itemsState, action) {
 	}
 }
 
+// reducer to add available items
 function reducer2(state, action) {
 	switch (action.type) {
 		case 'ADD_AVAILABLE_ITEM':
@@ -152,7 +154,6 @@ function reducer2(state, action) {
 const CartProvider = (props) => {
 	const [error, setError] = useState(null);
 
-	//
 	// to get my data from my firebase
 	const fetchItemHandler = useCallback(async function () {
 		try {
@@ -166,7 +167,7 @@ const CartProvider = (props) => {
 			}
 
 			const data = await response.json();
-			// console.log(data); //to see my data
+			console.log(data); //to see my data
 		} catch (error) {
 			setError(error.message);
 		}

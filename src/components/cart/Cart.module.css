@@ -15,12 +15,16 @@
 
 .title {
 	margin: 0 auto 2rem auto;
+	font-size: 3rem;
+	color: rgb(0, 0, 255);
+	text-shadow: 2px 2px 4px green;
+	letter-spacing: 0.5rem;
 }
 
 .totalAmount {
-    display: flex;
-    justify-content: space-between;
-	margin:0 2rem 3rem 2rem;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 2rem 3rem 2rem;
 	font-size: 2rem;
 }
 
@@ -31,32 +35,64 @@
 }
 
 /* buttons actions */
-.btnClose{
-    padding: 0.75rem 1.3rem;
-    border-radius: 10px;
-    background-color: rgb(255, 141, 141);
-    font-weight: 700;
-    font-size: 1rem;
+.btnClose {
+	padding: 0.75rem 1.3rem;
+	border-radius: 10px;
+	background-color: rgb(255, 141, 141);
+	font-weight: 700;
+	font-size: 1rem;
 }
 
-.btnOrder{
-    margin-left: 1rem;
-    padding: 0.75rem 1.3rem;
-    border-radius: 10px;
-    background-color: rgb(141, 255, 141);
-    font-weight: 700;
-    font-size: 1rem;
+.btnOrder {
+	margin-left: 1rem;
+	padding: 0.75rem 1.3rem;
+	border-radius: 10px;
+	background-color: rgb(141, 255, 141);
+	font-weight: 700;
+	font-size: 1rem;
 }
 
-.btnClose:hover{
-    background-color: rgb(255, 62, 62);
-    color: white;
-    border-color: white;
-    
+.btnClose:hover {
+	background-color: rgb(255, 62, 62);
+	color: white;
+	border-color: white;
 }
 
-.btnOrder:hover{
-    background-color: green;
-    color: white;
-    border-color: white;
+.btnOrder:hover {
+	background-color: green;
+	color: white;
+	border-color: white;
+}
+
+@media screen and (max-width: 768px) {
+	.cart-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		padding: 0;
+		/* overflow to make possible to scroll it */
+		overflow-y: auto;
+	}
+
+	.totalAmount {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0 2rem 2rem 2rem;
+		font-size: 2rem;
+	}
+
+	.totalAmountValue {
+		color: blue;
+		font-size: 2rem;
+		margin-left: 1rem;
+	}
 }

@@ -56,7 +56,9 @@ const AddItemForm = (props) => {
 	// };
 
 	const nameClassInvalid = isNameInvalid ? classes['form-invalid'] : '';
-	const descriptionClassInvalid = isDescriptionInvalid ? classes['form-invalid']: '';
+	const descriptionClassInvalid = isDescriptionInvalid
+		? classes['form-invalid']
+		: '';
 	const priceClassInvalid = isPriceInvalid ? classes['form-invalid'] : '';
 
 	// form submit handler
@@ -156,12 +158,12 @@ const AddItemForm = (props) => {
 					)}
 				</div>
 
-				<section className={classes.buttons}>
+				<div className={classes.buttons}>
 					<button className={classes.btnClose} onClick={onClose}>
 						Cancel
 					</button>
 					<AddItemFormBtn type="submit" />
-				</section>
+				</div>
 			</form>
 		</section>
 	);

@@ -32,7 +32,7 @@ const Meals = () => {
 
 
 	return (
-		<section>
+		<section className={classes.sectionSummaryAndItems}>
 			<RestaurantSummary />
 			<AvailableMeals itemsList={ctx.availableItems} />
 

@@ -1,42 +1,124 @@
+@font-face {
+	font-family: MilhoCozidoFont;
+	src: url('../../assets/MilhoCozidoFont.ttf');
+}
+
 .summary {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: space-between;
-	margin: 5% 10%;
+	align-items: center;
+	padding: 5rem 0 5rem 0;
+	background-image: url('https://static.vecteezy.com/system/resources/previews/006/241/446/original/gradient-background-mixed-with-blue-and-yellow-colors-you-can-use-this-background-for-presentations-banners-posters-and-invitations-free-photo.jpg');
+}
+
+.summary h1 {
+	font-family: MilhoCozidoFont;
+	font-size: 7rem;
+	text-align: center;
+}
+
+.summary h2 {
+	text-align: center;
+	padding: 1.5rem;
+	margin: 2rem 5rem;
 }
 
 .summary div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	max-width: 50%;
 	margin: 0 auto;
 }
 
-.summary li {
-	margin-top: 3rem;
-	font-size: 1.2rem;
-	list-style: none;
-	letter-spacing: 1px;
-}
-
-.summary li:hover {
-	animation: 1s linear 0s infinite rotateAnimation;
+.summary p {
+	padding: 1.5rem;
+	margin: 2rem 5rem;
+	font-size: 1.5rem;
 }
 
 .image1 {
-	background-image: url('../../assets/Prancheta1.png');
+	background-image: url('../../assets/BRASIL.png');
 	width: 350px;
 	height: 350px;
-	margin: 0 10%;
-	transform: scale(1.3);
+	/* margin: 0 50px; */
+	margin-top: 100px;
+	transform: scale(1.5);
+
 	transition: 600ms;
 	display: inline-block;
 }
 
 .image1:hover {
 	transform: scale(1.5);
-	background-image: url('../../assets/Prancheta2.png');
+	background-image: url('../../assets/BrasilRetangular.png');
 	border-radius: 15%;
 }
 
+@media screen and (max-width: 768px) {
+	.summary {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		margin: 0;
+		gap: 5rem;
+		text-align: center;
+	}
+
+	.summary h1 {
+		font-family: MilhoCozidoFont;
+		font-size: 5rem;
+	}
+
+	.summary h2 {
+		text-align: center;
+		padding: 1.5rem;
+		margin: 1rem 1rem;
+	}
+
+	.summary div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		max-width: 80%;
+		margin: 0 auto;
+	}
+
+	.summary p {
+		padding: 0rem;
+		margin: 2rem 0 0 0;
+		font-size: 1rem;
+	}
+
+	/* .image1 {
+		background-image: url('../../assets/BRASIL.png');
+		display: inline-block;
+		width: 250px;
+		height: 250px;
+		margin: 0;
+		padding: 0;
+		background-size: contain;
+		background-repeat: no-repeat;
+		transition: 600ms;
+	} */
+}
+
+@media screen and (max-width: 1200px) {
+	.summary p {
+		padding: 0rem;
+		margin: 2rem 1rem;
+		font-size: 1.5rem;
+	}
+
+	h1 {
+		text-align: center;
+	}
+}
+
+/* I was using this rotate animation just to learn how to animate in css */
 @keyframes rotateAnimation {
 	0% {
 		transform: rotate(0deg);
@@ -56,20 +138,5 @@
 
 	100% {
 		transform: rotate(0deg);
-	}
-}
-
-
-@media screen and (max-width: 768px) {
-	.summary {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-
-		margin: 10% 5%;
-	}
-
-	.image1{
-		margin: 5rem;
 	}
 }

@@ -2,7 +2,7 @@
 	/* margin-left: 20rem; */
 	margin-right: -20rem;
 	display: flex;
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .navbarList li {
@@ -10,23 +10,24 @@
 	list-style-type: none;
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+a {
+	text-decoration: none;
+	color: inherit;
 }
 
 @media screen and (max-width: 768px) {
 	.navbarList {
-		margin-right: -4rem;
+		display: none;
 	}
-    .navbarList li {
-        margin-right: 2rem;
-        list-style-type: none;
-    }
+
+	.navbarList li {
+		margin-right: 2rem;
+		list-style-type: none;
+	}
 }
 
-@media screen and (max-width: 1368px){
-	.navbarList{
+@media screen and (max-width: 1368px) {
+	.navbarList {
 		margin-right: -6rem;
 	}
 }

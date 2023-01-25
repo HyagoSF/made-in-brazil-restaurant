@@ -28,7 +28,7 @@ const App = () => {
 
 			{isModalOpened && <Modal onClose={onClose} />}
 
-			<h1>Adding form Branch</h1>
+			<h1>Checkout Branch</h1>
 
 			<Header
 				onClick={isModalOpenedHandler}

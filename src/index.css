@@ -25,9 +25,3 @@ body {
 	/* to fix the bottom at the bottom */
 	padding-bottom: 10rem;
 }
-
-@media screen and (min-width: 768px) {
-	html{
-		margin: 0;
-	}	
-}

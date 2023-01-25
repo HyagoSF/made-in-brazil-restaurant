@@ -1,6 +1,5 @@
 .formSection {
 	display: block;
-
 	margin: 0 10%;
 	justify-content: center;
 	align-items: center;
@@ -46,17 +45,18 @@ button {
 /* buttons actions */
 .buttons {
 	margin: 0 10%;
-	text-align: end;
+	text-align: center;
 }
 
 .btnClose {
 	font-size: 1.3rem;
 	margin-top: 0.5rem;
+	margin-bottom: 1rem;
 	padding: 0.5rem 1.8rem;
 	background-color: white;
 	border-radius: 15px;
 	float: end;
-	margin-right: 1rem;
+	/* margin-right: 1rem; */
 }
 
 .btnClose:hover {
@@ -72,4 +72,81 @@ button {
 .form-invalid input,
 .form-invalid textarea {
 	background-color: rgba(255, 0, 0, 0.377);
+}
+
+@media screen and (max-width: 768px) {
+	.formSection {
+		display: block;
+		margin: 0;
+		justify-content: center;
+		align-items: center;
+		padding: 0;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.form > div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	input[name='price'] {
+		margin-bottom: 1rem;
+	}
+
+	button {
+		margin: 0;
+	}
+
+	.label {
+		padding: 1rem 0 0.5rem 0;
+		font-weight: 700;
+		width: 80%;
+		text-align: start;
+	}
+
+	.input {
+		width: 80%;
+		margin: 0 20;
+		font: inherit;
+		padding: 0.5rem;
+		border-radius: 12px;
+		border: 1px solid #ccc;
+	}
+
+	/* buttons actions */
+	.buttons {
+		margin: 0 10%;
+		text-align: end;
+	}
+
+	.btnClose {
+		font-size: 1.3rem;
+		margin: 0.5rem 0 0.5rem 0;
+		padding: 0.5rem 1.8rem;
+		background-color: white;
+		border-radius: 15px;
+		float: none;
+		margin-right: 0;
+	}
+
+	.btnClose:hover {
+		background-color: rgb(255, 62, 62);
+		color: white;
+		border-color: white;
+	}
+
+	.invalid {
+		color: red;
+	}
+
+	.form-invalid input,
+	.form-invalid textarea {
+		background-color: rgba(255, 0, 0, 0.377);
+	}
 }

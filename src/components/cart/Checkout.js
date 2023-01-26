@@ -1,6 +1,5 @@
 import classes from './Checkout.module.css';
 import useInput from '../../hooks/use-input';
-import axios from 'axios';
 
 // name, street, postal code, city
 
@@ -95,6 +94,17 @@ const Checkout = (props) => {
 	const onSubmitForm = (e) => {
 		e.preventDefault();
 
+		const formIsValid =
+			!isNameInvalid &&
+			!isEmailInvalid &&
+			!isStreetInvalid &&
+			!isPostalCodeInvalid &&
+			!isCityInvalid;
+
+		if (!formIsValid) {
+			return;
+		}
+
 		const user = {
 			name: enteredName,
 			email: enteredEmail,
@@ -103,40 +113,43 @@ const Checkout = (props) => {
 			city: enteredCity,
 		};
 
-		axios
-			.post(
-				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/users.json',
-				user
-			)
-			.then(
-				(response) => {
-					console.log(response);
-					resetName();
-					resetEmail();
-					resetStreet();
-					resetPostalCode();
-					resetCity();
-					// return user;
-				},
-				(error) => {
-					console.log(error);
-				}
-			);
+		//to send the userData to my cart component, and then there I'll be able to send a post request to save it into my db
+		props.onSubmitOrder(user);
 
-		// Make a request for a user with a given ID
-		axios
-			.get(
-				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/users.json'
-			)
-			.then(function (response) {
-				// handle success
-				console.log(response);
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			});
+		resetName();
+		resetEmail();
+		resetStreet();
+		resetPostalCode();
+		resetCity();
 	};
+
+	/**
+	 *  just a test to get the user data using axios
+	 */
+	// const axiosTest = async () => {
+	// 	// GET request for remote image in node.js
+	// 	axios({
+	// 		method: 'get',
+	// 		url: 'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/users.json',
+	// 		responseType: 'json',
+	// 	}).then(function (response) {
+	// 		let users = [];
+
+	// 		for (const key in response.data) {
+	// 			// console.log(response.data[key].postalCode);
+	// 			users.push({
+	// 				key: key,
+	// 				name: response.data[key].name,
+	// 				email: response.data[key].email,
+	// 				street: response.data[key].street,
+	// 				postalCode: response.data[key].postalCode,
+	// 				city: response.data[key].city,
+	// 			});
+	// 		}
+
+	// 		console.log(users);
+	// 	});
+	// };
 
 	return (
 		<form onSubmit={onSubmitForm} className={classes.checkoutForm}>
@@ -150,7 +163,6 @@ const Checkout = (props) => {
 					type="text"
 					name="name"
 					id="name"
-					required
 				/>
 
 				{isNameInvalid && (
@@ -168,7 +180,7 @@ const Checkout = (props) => {
 					onChange={onEmailChangeHandler}
 					onBlur={onEmailBlurHandler}
 					value={enteredEmail}
-					required
+					
 				/>
 
 				{isEmailInvalid && (
@@ -188,7 +200,7 @@ const Checkout = (props) => {
 					onChange={onStreetChangeHandler}
 					onBlur={onStreetBlurHandler}
 					value={enteredStreet}
-					required
+					
 				/>
 
 				{isStreetInvalid && (
@@ -208,7 +220,7 @@ const Checkout = (props) => {
 					onChange={onPostalCodeChangeHandler}
 					onBlur={onPostalCodeBlurHandler}
 					value={enteredPostalCode}
-					required
+					
 				/>
 
 				{isPostalCodeInvalid && (
@@ -228,7 +240,7 @@ const Checkout = (props) => {
 					onChange={onCityChangeHandler}
 					onBlur={onCityBlurHandler}
 					value={enteredCity}
-					required
+					
 				/>
 
 				{isCityInvalid && (
@@ -248,6 +260,10 @@ const Checkout = (props) => {
 				<button className={classes.btnOrder} type="submit">
 					submit
 				</button>
+
+				{/* <button type="button" onClick={axiosTest}>
+					see Users
+				</button> */}
 			</div>
 		</form>
 	);

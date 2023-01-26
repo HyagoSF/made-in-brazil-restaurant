@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import CartContext from '../../stage/cart-context';
 import classes from './Cart.module.css';
 import CartItem from './CartItem';
+import axios from 'axios';
 
 import Checkout from './Checkout';
 
@@ -18,7 +19,12 @@ const Cart = (props) => {
 	// to show the form just if I do have items in my cart
 	const showForm = () => {
 		if (items.length > 0) {
-			return <Checkout onCancel={props.onClick} />;
+			return (
+				<Checkout
+					onSubmitOrder={submitOrderHandler}
+					onCancel={props.onClick}
+				/>
+			);
 		}
 	};
 
@@ -36,6 +42,27 @@ const Cart = (props) => {
 			</button>
 		</div>
 	);
+
+	const submitOrderHandler = (userData) => {
+		const orderData = {
+			userData,
+			mealsOfTheOrder: items,
+		};
+
+		axios
+			.post(
+				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/orders.json',
+				orderData
+			)
+			.then(
+				(response) => {
+					console.log(response);
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
+	};
 
 	return (
 		<div className={classes['cart-content']}>

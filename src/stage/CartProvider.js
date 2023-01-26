@@ -6,48 +6,11 @@ const defaultCartState = {
 	totalAmount: 0,
 };
 
-const DUMMY_MEALS = [
-	{
-		id: 'i1',
-		name: 'Coxinha',
-		description:
-			'Chicken pastries with aioli, a classic Brazilian street food',
-		price: 8.25,
-	},
-	{
-		id: 'i2',
-		name: 'Pao de Queijo',
-		description: 'Brazilian mini cheese breads',
-		price: 6.5,
-	},
-	{
-		id: 'i3',
-		name: 'Mandioca Frita',
-		description: 'Cassava chips served with alioli',
-		price: 5.95,
-	},
-	{
-		id: 'i4',
-		name: 'Bolinhos de Bacalhau',
-		description: 'Mini Salt cod fishcakes served with lime mayo',
-		price: 8.15,
-	},
-	{
-		id: 'i5',
-		name: 'Frango a Passarinho',
-		description: 'Marinated crispy chicken pieces served with lime mayo',
-		price: 7.75,
-	},
-	{
-		id: 'i6',
-		name: 'Bacon',
-		description:
-			'Chicken pastries with aioli, a classic Brazilian street food',
-		price: 8.25,
-	},
-];
+/**
+ * REDUCERS
+ */
 
-// reducer to add items to cart
+// to add items to cart
 function reducer(itemsState, action) {
 	switch (action.type) {
 		case 'ADD_ITEM_CART':
@@ -137,9 +100,24 @@ function reducer(itemsState, action) {
 	}
 }
 
-// reducer to add available items
+// to add available items
 function reducer2(state, action) {
 	switch (action.type) {
+		case 'GET_THE_INITIAL_VALUES':
+			const dbMeals = action.initialValues;
+			const loadedMeals = [];
+
+			// console.log('hello');
+
+			for (const key in dbMeals) {
+				loadedMeals.push({
+					id: key,
+					name: dbMeals[key].name,
+					description: dbMeals[key].description,
+					price: dbMeals[key].price,
+				});
+			}
+			return loadedMeals;
 		case 'ADD_AVAILABLE_ITEM':
 			let updatedAvailableItems;
 
@@ -151,56 +129,26 @@ function reducer2(state, action) {
 	}
 }
 
+/**
+ * CartProvider Component
+ */
 const CartProvider = (props) => {
+	/**
+	 * States
+	 */
 	const [error, setError] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [cartState, dispatchAction] = useReducer(reducer, defaultCartState);
+	const [currentItemsState, dispatchCurrentItemsAction] = useReducer(
+		reducer2,
+		[]
+	);
 
-	// to get my data from my firebase
-	const fetchItemHandler = useCallback(async function () {
-		try {
-			const response = await fetch(
-				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList.json',
-				{ method: 'GET' }
-			);
+	/**
+	 * Handlers
+	 */
 
-			if (!response.ok) {
-				throw new Error('Something went wrong');
-			}
-
-			const data = await response.json();
-			console.log(data); //to see my data
-		} catch (error) {
-			setError(error.message);
-		}
-	});
-	// console.log(data)
-
-	// // check here before try to get the json data
-	// if (!response.ok) {
-	// 	// and if I throw this error, I'll be sent to the .catch block
-	// 	throw new Error('Some error has occurred');
-	// }
-
-	// const data = await response.json();
-
-	// let newArray = [];
-
-	// for (const key in data) {
-	// 	newArray.push({
-	// 		key: key,
-	// 		movie_title: data[key].movie_title,
-	// 		movie_description: data[key].movie_description,
-	// 		movie_releaseDate: data[key].movie_releaseDate,
-	// 	});
-	// }
-
-	// dispatch({ movies: newArray, type: 'ADD_MOVIE' });
-
-	// execute fetchItemHandler when the app starts and every time my item change
-	useEffect(() => {
-		fetchItemHandler();
-	}, [fetchItemHandler]);
-
-	// handling with adding items to cart ******************************
+	// Cart Items
 	const addItemToCartHandler = async (item) => {
 		try {
 			const response = await fetch(
@@ -224,9 +172,16 @@ const CartProvider = (props) => {
 		}
 	};
 
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * NEED TO FIX HERE, I'M CURRENTLY NOT ABLE TO REMOVE ITEMS FROM MY FIREBASE
+	 */
 	const removeItemOfCartHandler = async (id) => {
 		const url =
-			'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList/itemsList/';
+			'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList/cartItems/';
 
 		const response = await fetch(url + id + '.json', {
 			method: 'DELETE',
@@ -239,10 +194,40 @@ const CartProvider = (props) => {
 			throw new Error('Something happened');
 		}
 
+		console.log(id);
+
 		dispatchAction({ type: 'REMOVE_ITEM_CART', id: id });
 	};
 
-	// Handling with adding new Available items *****************************
+	//  Available items
+
+	// To get the initial data from my firebase
+	const fetchItemHandler = async function () {
+		try {
+			const response = await fetch(
+				'https://made-in-brazil-restaurant-default-rtdb.firebaseio.com/itemsList/availableItems.json',
+				{ method: 'GET' }
+			);
+
+			if (!response.ok) {
+				throw new Error('Something went wrong');
+			}
+
+			const data = await response.json();
+
+			dispatchCurrentItemsAction({
+				type: 'GET_THE_INITIAL_VALUES',
+				initialValues: data,
+			});
+		} catch (error) {
+			setError(error.message);
+		}
+
+		setIsLoading(false);
+	};
+
+	// console.log(isLoading)
+
 	const addNewAvailableItemHandler = async (availableItem) => {
 		try {
 			const response = await fetch(
@@ -265,24 +250,28 @@ const CartProvider = (props) => {
 		}
 	};
 
-	const removeNewAvailableItemHandler = (id) => {
+	const removeNewAvailableItemHandler = async (id) => {
 		return;
 	};
 
-	const [cartState, dispatchAction] = useReducer(reducer, defaultCartState);
-	const [currentItemsState, dispatchCurrentItemsAction] = useReducer(
-		reducer2,
-		DUMMY_MEALS
-	);
+	// execute fetchItemHandler when the app starts and every time my item change
+	useEffect(() => {
+		fetchItemHandler();
+	}, []);
 
+	/**
+	 * The real context I'll pass to components
+	 */
 	const cartContext = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemOfCartHandler,
-		availableItems: currentItemsState,
 		addNewAvailableItem: addNewAvailableItemHandler,
 		removeAvailableItem: removeNewAvailableItemHandler,
+		availableItems: currentItemsState,
+		isLoading: isLoading,
+		error,
 	};
 
 	return (

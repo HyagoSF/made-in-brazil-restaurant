@@ -13,10 +13,12 @@ import Footer from './components/footer/Footer';
 const App = () => {
 	const isModalOpenedHandler = (props) => {
 		props.preventDefault();
+		document.body.style.overflow = 'hidden'
 		setIsModalOpened(true);
 	};
 
 	const onClose = () => {
+		document.body.style.overflow = 'unset';
 		setIsModalOpened(false);
 	};
 
@@ -28,7 +30,7 @@ const App = () => {
 
 			{isModalOpened && <Modal onClose={onClose} />}
 
-			<h1>Checkout Branch</h1>
+			{/* <h1>Checkout Branch</h1> */}
 
 			<Header
 				onClick={isModalOpenedHandler}

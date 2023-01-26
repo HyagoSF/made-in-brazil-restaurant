@@ -9,6 +9,7 @@ const useInput = (validation) => {
 
 	const onValueChangeHandler = (e) => {
 		setEnteredValue(e.target.value);
+		setValueWasTouched(true);
 	};
 
 	const onValueBlurHandler = (e) => {
@@ -23,12 +24,12 @@ const useInput = (validation) => {
 	return {
 		value: {
 			enteredValue,
-			// valueWasTouched,
+			valueWasTouched,
 			// valueIsValid,
 			isValueInvalid,
 			onValueChangeHandler,
 			onValueBlurHandler,
-            reset
+            reset,
 		},
 	};
 };

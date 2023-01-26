@@ -9,6 +9,8 @@ import React from 'react';
 		availableItems: [],
 		addNewAvailableItem: (availableItem) => {},
 		removeAvailableItem: (id) => {},
+		clearCart: () => {},
+		
 	});
 
 export default CartContext;

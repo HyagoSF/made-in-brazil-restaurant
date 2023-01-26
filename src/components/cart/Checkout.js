@@ -8,6 +8,7 @@ const Checkout = (props) => {
 	const {
 		value: {
 			enteredValue: enteredName,
+			valueWasTouched: nameWasTouched,
 			isValueInvalid: isNameInvalid,
 			onValueChangeHandler: onNameChangeHandler,
 			onValueBlurHandler: onNameBlurHandler,
@@ -19,6 +20,7 @@ const Checkout = (props) => {
 	const {
 		value: {
 			enteredValue: enteredEmail,
+			valueWasTouched: emailWasTouched,
 			isValueInvalid: isEmailInvalid,
 			onValueChangeHandler: onEmailChangeHandler,
 			onValueBlurHandler: onEmailBlurHandler,
@@ -34,6 +36,7 @@ const Checkout = (props) => {
 	const {
 		value: {
 			enteredValue: enteredStreet,
+			valueWasTouched: streetWasTouched,
 			isValueInvalid: isStreetInvalid,
 			onValueChangeHandler: onStreetChangeHandler,
 			onValueBlurHandler: onStreetBlurHandler,
@@ -45,6 +48,7 @@ const Checkout = (props) => {
 	const {
 		value: {
 			enteredValue: enteredPostalCode,
+			valueWasTouched: postalCodeWasTouched,
 			isValueInvalid: isPostalCodeInvalid,
 			onValueChangeHandler: onPostalCodeChangeHandler,
 			onValueBlurHandler: onPostalCodeBlurHandler,
@@ -56,6 +60,7 @@ const Checkout = (props) => {
 	const {
 		value: {
 			enteredValue: enteredCity,
+			valueWasTouched: cityWasTouched,
 			isValueInvalid: isCityInvalid,
 			onValueChangeHandler: onCityChangeHandler,
 			onValueBlurHandler: onCityBlurHandler,
@@ -101,7 +106,15 @@ const Checkout = (props) => {
 			!isPostalCodeInvalid &&
 			!isCityInvalid;
 
-		if (!formIsValid) {
+		const formWasTouched =
+			nameWasTouched &&
+			emailWasTouched &&
+			streetWasTouched &&
+			postalCodeWasTouched &&
+			cityWasTouched;
+
+		if (!formIsValid || !formWasTouched) {
+			console.log('Form is not valid');
 			return;
 		}
 
@@ -163,6 +176,7 @@ const Checkout = (props) => {
 					type="text"
 					name="name"
 					id="name"
+					required
 				/>
 
 				{isNameInvalid && (
@@ -177,10 +191,10 @@ const Checkout = (props) => {
 					type="text"
 					name="email"
 					id="email"
+					required
 					onChange={onEmailChangeHandler}
 					onBlur={onEmailBlurHandler}
 					value={enteredEmail}
-					
 				/>
 
 				{isEmailInvalid && (
@@ -197,10 +211,10 @@ const Checkout = (props) => {
 					type="text"
 					name="street"
 					id="street"
+					required
 					onChange={onStreetChangeHandler}
 					onBlur={onStreetBlurHandler}
 					value={enteredStreet}
-					
 				/>
 
 				{isStreetInvalid && (
@@ -217,10 +231,10 @@ const Checkout = (props) => {
 					type=""
 					name="postalcode"
 					id="postalcode"
+					required
 					onChange={onPostalCodeChangeHandler}
 					onBlur={onPostalCodeBlurHandler}
 					value={enteredPostalCode}
-					
 				/>
 
 				{isPostalCodeInvalid && (
@@ -237,10 +251,10 @@ const Checkout = (props) => {
 					type="text"
 					name="city"
 					id="city"
+					required
 					onChange={onCityChangeHandler}
 					onBlur={onCityBlurHandler}
 					value={enteredCity}
-					
 				/>
 
 				{isCityInvalid && (

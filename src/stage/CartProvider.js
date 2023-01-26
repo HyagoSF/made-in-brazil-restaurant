@@ -94,6 +94,10 @@ function reducer(itemsState, action) {
 				items: updatedItems2,
 				totalAmount: updatedTotalAmount2,
 			};
+
+		case 'CLEAR_CART':
+			return defaultCartState;
+
 		// if the item is already in the cart just remove one of the amount
 		default:
 			return defaultCartState;
@@ -172,11 +176,10 @@ const CartProvider = (props) => {
 		}
 	};
 
-
 	/**
-	 * 
-	 * 
-	 * 
+	 *
+	 *
+	 *
 	 * NEED TO FIX HERE, I'M CURRENTLY NOT ABLE TO REMOVE ITEMS FROM MY FIREBASE
 	 */
 	const removeItemOfCartHandler = async (id) => {
@@ -254,6 +257,10 @@ const CartProvider = (props) => {
 		return;
 	};
 
+	const clearCartHandler = (params) => {
+		dispatchAction({ type: 'CLEAR_CART' });
+	};
+
 	// execute fetchItemHandler when the app starts and every time my item change
 	useEffect(() => {
 		fetchItemHandler();
@@ -272,6 +279,7 @@ const CartProvider = (props) => {
 		availableItems: currentItemsState,
 		isLoading: isLoading,
 		error,
+		clearCart: clearCartHandler,
 	};
 
 	return (

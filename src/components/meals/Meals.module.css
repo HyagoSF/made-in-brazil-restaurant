@@ -1,10 +1,24 @@
-.form{
-    text-align: center;
-    margin-top: 4rem;
+.form {
+	text-align: center;
+	margin-top: 4rem;
+}
+
+.mealsIsLoading {
+	margin-top: 3rem;
+	color: blue;
+	text-align: center;
+}
+
+.mealsError {
+    font-family: MilhoCozidoFont;
+    letter-spacing: 0.3rem;
+	margin-top: 3rem;
+	color: red;
+	text-align: center;
 }
 
 @media screen and (max-width: 768px) {
-    /* .sectionSummaryAndItems{
+	/* .sectionSummaryAndItems{
         max-width: 100%;
         padding: 0;
         margin:0

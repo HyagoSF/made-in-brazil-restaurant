@@ -23,8 +23,8 @@ const useInput = (validation) => {
 	return {
 		value: {
 			enteredValue,
-			valueWasTouched,
-			valueIsValid,
+			// valueWasTouched,
+			// valueIsValid,
 			isValueInvalid,
 			onValueChangeHandler,
 			onValueBlurHandler,

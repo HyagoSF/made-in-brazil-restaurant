@@ -30,17 +30,46 @@ const Meals = () => {
 		ctx.addNewAvailableItem(item);
 	};
 
+	/**
+	 * Handling Loading and error
+	 */
+	let isLoading = ctx.isLoading;
+	let error = ctx.error;
+
+	const showIsLoading = () => {
+		return (
+			<section>
+				<h1 className={classes.mealsIsLoading}>Loading...</h1>
+			</section>
+		);
+	};
+
+	const showError = () => {
+		return (
+			<section>
+				<h1 className={classes.mealsError}>{error}</h1>
+			</section>
+		);
+	};
 
 	return (
 		<section className={classes.sectionSummaryAndItems}>
 			<RestaurantSummary />
-			<AvailableMeals itemsList={ctx.availableItems} />
+
+			{/* handling is loading section  */}
+			{isLoading ? (
+				showIsLoading()
+			) : (
+				<AvailableMeals itemsList={ctx.availableItems} />
+			)}
+
+			{/* if I get some error show it */}
+			{error && showError()}
 
 			<div className={classes.form}>
 				{isBtnShown && <AddItemFormBtn onClick={showFormHandler} />}
 				{isFormShown && (
 					<AddItemForm
-
 						onClose={closeFormHandler}
 						onAddItem={addItemHandler}
 					/>

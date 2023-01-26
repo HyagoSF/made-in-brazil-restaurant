@@ -23,9 +23,10 @@
 
 .totalAmount {
 	display: flex;
-	justify-content: space-between;
-	margin: 0 2rem 3rem 2rem;
+	justify-content: space-around;
+	margin: 0 3rem 3rem 2rem;
 	font-size: 2rem;
+	
 }
 
 .totalAmountValue {
@@ -82,10 +83,10 @@
 
 	.totalAmount {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		gap: 1.5rem;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: space-around;
 		margin: 0 2rem 2rem 2rem;
 		font-size: 2rem;
 	}

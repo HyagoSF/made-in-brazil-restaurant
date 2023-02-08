@@ -5,9 +5,6 @@ import Card from '../UI/Card/Card';
 import MealItem from './MealItem/MealItem';
 
 const AvailableMeals = (props) => {
-
-	
-	
 	// always remember to use parenthesis when calling map for each item in the list
 	const mealsList = props.itemsList.map((item) => (
 		<MealItem

@@ -7,15 +7,35 @@ import axios from 'axios';
 
 import Checkout from './Checkout';
 
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { cartActions } from '../../redux/store/cart-slice';
+
 const Cart = (props) => {
-	const ctx = useContext(CartContext);
+	// const ctx = useContext(CartContext);
 
-	const [isCheckout, setIsCheckout] = useState(false);
+	const dispatch = useDispatch();
 
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [didSubmit, setDidSubmit] = useState(false);
+	// all this states I'm gonna add to my redux and not use here
+	// const [isCheckout, setIsCheckout] = useState(false);
+	// const [isSubmitting, setIsSubmitting] = useState(false);
+	// const [didSubmit, setDidSubmit] = useState(false);
 
-	const { items, totalAmount, clearCart } = ctx;
+	// const { items, totalAmount, clearCart } = ctx;
+
+	// Using the redux store
+	const cart = useSelector((state) => state.cart);
+
+	const {
+		cartItems: items,
+		totalPriceOfItemsInCart: totalAmount,
+		totalOfItemsInCart,
+		isCartOpen,
+		hasChanged,
+		cartItemsStates,
+	} = cart;
+
+	const { isCheckout, isSubmitting, didSubmit } = cartItemsStates;
 
 	const totalAmountFixed = totalAmount.toFixed(2);
 
@@ -39,7 +59,11 @@ const Cart = (props) => {
 			<button
 				className={classes.btnOrder}
 				onClick={() => {
-					setIsCheckout(true);
+					if (items.length !== 0) {
+						dispatch(cartActions.setIsCheckout(true));
+					} else {
+						alert('You need to add items to your cart first!');
+					}
 				}}>
 				Order
 			</button>
@@ -47,7 +71,9 @@ const Cart = (props) => {
 	);
 
 	const submitOrderHandler = (userData) => {
-		setIsSubmitting(true);
+		// setIsSubmitting(true);
+
+		dispatch(cartActions.setIsSubmitting(true));
 
 		const orderData = {
 			userData,
@@ -68,11 +94,22 @@ const Cart = (props) => {
 				}
 			);
 
-		setIsSubmitting(false);
-		setDidSubmit(true);
+		dispatch(cartActions.setIsSubmitting(false));
+		dispatch(cartActions.setDidSubmit(true));
+		// setIsSubmitting(false);
+		// setDidSubmit(true);
 
 		// To clear the cart after the order
-		clearCart();
+		dispatch(cartActions.clearCart());
+		// clearCart();
+	};
+
+	const addItemToCart = (item) => {
+		dispatch(cartActions.addItemToCartInsideCheckout(item));
+	};
+
+	const removeItemFromCart = (id) => {
+		dispatch(cartActions.removeItemFromCart(id));
 	};
 
 	/**
@@ -83,7 +120,13 @@ const Cart = (props) => {
 			<h1 className={classes.title}>My Cart</h1>
 
 			{/* CartItem and form inside it*/}
-			<CartItem onRemoveItem={ctx.removeItem} cartItems={items} />
+			<CartItem
+				// onRemoveItem={ctx.removeItem}
+				onAddItemRedux={addItemToCart}
+				onRemoveItemRedux={removeItemFromCart}
+				cartItems={items}
+			/>
+			{/* <CartItem onRemoveItem={removeItemFromCart} cartItems={items} /> */}
 
 			{/* Total Amount */}
 			<div className={classes.totalAmount}>
@@ -108,7 +151,9 @@ const Cart = (props) => {
 
 	const isSubmitted = (
 		<div className={classes.isSubmitted}>
-			<p className={classes.isSubmittedText}>Successfully sent the order</p>
+			<p className={classes.isSubmittedText}>
+				Successfully sent the order
+			</p>
 		</div>
 	);
 

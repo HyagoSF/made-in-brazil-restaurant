@@ -5,12 +5,22 @@ import HeaderCartIcon from './HeaderCartIcon';
 import { useContext, useEffect, useState } from 'react';
 import CartContext from '../../stage/cart-context';
 
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../../redux/store/cart-slice';
+import { useSelector } from 'react-redux';
+
 const HeaderCartButton = (props) => {
-	const [bump, setBump] = useState(false);
+	// const [bump, setBump] = useState(false);
 
-	const ctx = useContext(CartContext);
+	const bump = useSelector((state) => state.cart.cartItemsStates.bump);
 
-	const { items } = ctx; ////to extract all the items out of cartCtx, then I don't have to type cartCtx.items every time when I want those items
+	// const ctx = useContext(CartContext);
+
+	const dispatch = useDispatch();
+
+	const { cartItems: items } = useSelector((state) => state.cart);
+
+	// const { items } = ctx; ////to extract all the items out of cartCtx, then I don't have to type cartCtx.items every time when I want those items
 
 	const updatedTotalItems = items.reduce(
 		// I start at 0, and for each item of the array I'll add the item.amount to my accumulator
@@ -26,11 +36,13 @@ const HeaderCartButton = (props) => {
 		}
 
 		// if my updatedTotalItems change I'll set my bump to true
-		setBump(true);
+		dispatch(cartActions.setBump(true));
+		// setBump(true);
 
 		//and after 300ms I'll set this to false again
 		const timer = setTimeout(() => {
-			setBump(false);
+			dispatch(cartActions.setBump(false));
+			// setBump(false);
 		}, 300);
 
 		// then I'll clean my timeout to clear memory of my app

@@ -4,22 +4,38 @@ import classes from './MealItem.module.css';
 
 import MealItemForm from './MealItemForm';
 
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../../../redux/store/cart-slice';
+
 const MealItem = (props) => {
 	// initialValue of my ref (this refItem is gonna be my amount value)
 	// const refItem = useRef();
 
-	const ctx = useContext(CartContext);
+	const dispatch = useDispatch();
+
+	// const ctx = useContext(CartContext);
 
 	const onAddItemToCartHandler = (amount) => {
 		//I need to add the item and pass the item I got from the input, I have to use useRef to be able to take data from that input and pass that ref to my addItem
-		ctx.addItem({
-			key: props.id,
-			id: props.id,
-			name: props.name,
-			description: props.description,
-			price: props.price,
-			amount: amount,
-		});
+		// ctx.addItem({
+		// 	key: props.id,
+		// 	id: props.id,
+		// 	name: props.name,
+		// 	description: props.description,
+		// 	price: props.price,
+		// 	amount: amount,
+		// });
+
+		dispatch(
+			cartActions.addItemToCart({
+				key: props.id,
+				id: props.id,
+				name: props.name,
+				description: props.description,
+				price: props.price,
+				amount: amount,
+			})
+		);
 	};
 
 	return (

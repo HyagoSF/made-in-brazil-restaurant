@@ -4,16 +4,25 @@ import Meals from './components/meals/Meals';
 
 import Modal from './components/UI/Modal/Modal';
 
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import CartProvider from './stage/CartProvider';
 
 import Footer from './components/footer/Footer';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+	fetchAvailableItemsData,
+	fetchCartData,
+} from './redux/actions/cart-actions';
+
 const App = () => {
+	const dispatch = useDispatch();
+
 	const isModalOpenedHandler = (props) => {
 		props.preventDefault();
-		document.body.style.overflow = 'hidden'
+		document.body.style.overflow = 'hidden';
 		setIsModalOpened(true);
 	};
 
@@ -24,8 +33,13 @@ const App = () => {
 
 	const [isModalOpened, setIsModalOpened] = useState(false);
 
+	useEffect(() => {
+		// dispatch(fetchCartData());
+		dispatch(fetchAvailableItemsData());
+	}, [dispatch]);
+
 	return (
-		<CartProvider>
+		<Fragment>
 			{/* Header */}
 
 			{isModalOpened && <Modal onClose={onClose} />}
@@ -44,7 +58,7 @@ const App = () => {
 
 			{/* Footer */}
 			<Footer />
-		</CartProvider>
+		</Fragment>
 	);
 };
 

@@ -1,7 +1,6 @@
 .button {
 	background-color: #fff;
 	padding: 5px;
-	margin: 5px;
 	border-radius: 15px;
 	display: flex;
 	align-items: center;
@@ -28,21 +27,21 @@
 		transform: scale(1);
 	}
 
-    10% {
-        transform: scale(0.9);
-    }
+	10% {
+		transform: scale(0.9);
+	}
 
 	30% {
 		transform: scale(1.1);
 	}
 
-    50% {
-        transform: scale(1.15);
-    }
+	50% {
+		transform: scale(1.15);
+	}
 
-    75% {
-        transform: scale(1.2)
-    }
+	75% {
+		transform: scale(1.2);
+	}
 
 	100% {
 		transform: scale(1);

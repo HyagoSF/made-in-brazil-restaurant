@@ -2,13 +2,72 @@
 	/* to fix it in the top */
 	position: sticky;
 	top: 0;
-
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	background-color: white;
-	border-bottom: 1px solid black;
-	max-width: 95%;
+	max-width: 60%;
 	margin: 0 auto;
+	padding: 0.5rem 1rem;
 	z-index: 10;
+}
+
+.logged {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
+.logoutBtn {
+	background-color: #f44336;
+	color: white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.loginBtn {
+	background-color: #4caf50;
+	color: white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 0 0 0 auto;
+}
+
+@media (max-width: 768px) {
+	.header {
+		max-width: 80%;
+
+	}
+	.logged {
+		gap: 1rem;
+	}
+}
+
+@media (max-width: 425px) {
+	.header {
+		flex-direction: column;
+		position: sticky;
+		top: 0;
+		align-items: center;
+	}
+	.logged {
+		justify-content: center;
+		align-items: center;
+		margin-top: 1rem;
+		max-width: 100%;
+	}
+
+	.loginBtn {
+		background-color: #4caf50;
+		color: white;
+		padding: 0.5rem 1rem;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		margin: 1rem 0 0 0;
+	}
 }

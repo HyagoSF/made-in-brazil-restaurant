@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/made-in-brazil-restaurant/static/css/main.60906472.css",
+    "main.js": "/made-in-brazil-restaurant/static/js/main.09d241c3.js",
+    "static/media/BrasilRetangular.png": "/made-in-brazil-restaurant/static/media/BrasilRetangular.8888486aefabf48f7aa1.png",
+    "static/media/BRASIL.png": "/made-in-brazil-restaurant/static/media/BRASIL.f20c9b995b340c03fc22.png",
+    "static/media/MilhoCozidoFont.ttf": "/made-in-brazil-restaurant/static/media/MilhoCozidoFont.656a2203a9048f8782f3.ttf",
+    "index.html": "/made-in-brazil-restaurant/index.html",
+    "main.60906472.css.map": "/made-in-brazil-restaurant/static/css/main.60906472.css.map",
+    "main.09d241c3.js.map": "/made-in-brazil-restaurant/static/js/main.09d241c3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.60906472.css",
+    "static/js/main.09d241c3.js"
+  ]
+}
